@@ -1,0 +1,13 @@
+BODY {
+  width: 960px;
+  margin: auto;
+}
+
+.banner IMG {
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-box-shadow: 2px 2px 5px #888;
+  -webkit-box-shadow: 2px 2px 5px #888;
+  box-shadow: 2px 2px 5px #888;
+}

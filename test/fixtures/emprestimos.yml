@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  codigo: MyString
+  data_emprestimo: 2010-11-16
+  data_prev_devolucao: 2010-11-16
+  data_devolucao: 2010-11-16
+
+two:
+  codigo: MyString
+  data_emprestimo: 2010-11-16
+  data_prev_devolucao: 2010-11-16
+  data_devolucao: 2010-11-16

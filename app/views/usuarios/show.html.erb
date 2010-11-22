@@ -1,0 +1,16 @@
+<h2>Detalhamento de livro</h2>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Login:</b>
+  <%= @usuario.login %>
+</p>
+
+<p>
+  <b>Nome:</b>
+  <%= @usuario.nome %>
+</p>
+
+<%= link_to 'Editar', edit_usuario_path(@usuario) %> |
+<%= link_to 'Voltar', usuarios_path %>

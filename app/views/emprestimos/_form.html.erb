@@ -1,0 +1,31 @@
+ <table>
+  <tr bgcolor=<%= bgcolor %> >
+    <th>Código</th>
+    <th>Título</th>
+    <th>Autor</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+ <% @livros.each do |livro| %>
+   <% if bgcolor == "#9CC" then 
+      bgcolor = "#FFF"
+      else bgcolor = "#9CC" 
+      end
+   %>
+<tr bgcolor=<%=bgcolor %>>
+  <td><%= livro.codigo %></td>
+  <td><%= livro.titulo %></td>
+  <td><%= livro.autor %></td>
+  <td><%= link_to 'Empréstimo', new_livro_emprestimo_path(livro), confirm: 'Confirmar empréstimo?' %></td>
+  <td><%= link_to 'Detalhes', livro %></td>
+  <td><%= link_to 'Editar', edit_livro_path(livro) %></td>
+  <td><%= link_to 'Apagar', livro, confirm: 'Está certo disso?', method: :delete %></td>
+</tr>
+<% end %>
+</table>
+
+<%= @livro.codigo %>
+<%= @emprestimo.livro.titulo %>

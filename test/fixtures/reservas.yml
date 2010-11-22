@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  codigo: MyString
+  data_reserva: 2010-11-16
+
+two:
+  codigo: MyString
+  data_reserva: 2010-11-16

@@ -1,0 +1,46 @@
+  <% form_tag usuarios_path, method: :get do %>
+    
+     <%= label_tag :login %>
+     <%= text_field_tag :login %>
+     <%= label_tag :nome %>
+     <%= text_field_tag :nome %>
+     <%= submit_tag 'Pesquisar' %>
+
+  <% end %>
+
+<% if not @usuarios.nil? then %>
+  <% bgcolor = "#9CC" %>
+   <table>
+    <tr bgcolor=<%= bgcolor %> >
+      <th>Login</th>
+      <th>Nome</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  
+   <% @usuarios.each do |usuario| %>
+     <% if bgcolor == "#9CC" then 
+         bgcolor = "#FFF"
+         else bgcolor = "#9CC" 
+         end
+      %>
+   <tr bgcolor=<%= bgcolor %> >
+    <td><%= usuario.login %></td>
+    <td><%= usuario.nome %></td>
+    <td><%= link_to 'Detalhes', usuario %></td>
+    <td><%= link_to 'Editar', edit_usuario_path(usuario) %></td>
+    <td><%= link_to 'Apagar', usuario, confirm: 'Está certo disso?', method: :delete %></td>
+  </tr>
+ <% end %>
+ </table>
+<% end %> 
+
+
+<br />
+
+<%= link_to 'Cadastrar usuário', new_usuario_path %>
+<br />
+
+<%= link_to 'voltar', root_path %>
+
