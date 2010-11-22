@@ -1,3 +1,5 @@
+
+  <h3> Localizar Usuário </h3>
   <% form_tag usuarios_path, method: :get do %>
     
      <%= label_tag :login %>
@@ -7,7 +9,7 @@
      <%= submit_tag 'Pesquisar' %>
 
   <% end %>
-
+<br/>
 <% if not @usuarios.nil? then %>
   <% bgcolor = "#9CC" %>
    <table>
