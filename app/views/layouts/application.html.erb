@@ -7,6 +7,13 @@
   <div class='banner'>
    
   </div>
+  
+  <% if usuario_signed_in? -%>
+          <div id="usuario_login_box" style="float:right">
+            <%= current_usuario.name %> |
+            <%= link_to 'sair', destroy_usuario_session_path %>
+          </div>
+        <% end -%>
 
   <p>A Wikipedia do Recife</p>
   

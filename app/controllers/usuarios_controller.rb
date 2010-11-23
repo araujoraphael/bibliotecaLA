@@ -1,10 +1,13 @@
 class UsuariosController < ApplicationController
+
+  before_filter :authenticate_usuario!
+ 
   
   def index
     query = Usuario.scoped
     
-    query = query.where('login LIKE ?', "#{params[:login]}") unless params[:login].blank?
-        query = query.where('nome LIKE?', "%#{params[:nome]}%") unless params[:nome].blank?
+    query = query.where('email LIKE ?', "#{params[:email]}") unless params[:email].blank?
+        query = query.where('name LIKE?', "%#{params[:name]}%") unless params[:name].blank?
     @usuarios = query.all
     
     respond_to do |format|
@@ -34,7 +37,9 @@ class UsuariosController < ApplicationController
    
    def create
       @usuario = Usuario.new(params[:usuario])
-
+      @usuario.login = @usuario.login
+      @usuario.isadmin = false
+            
       respond_to do |format|
         if @usuario.save
           format.html { redirect_to(usuarios_path, notice: 'livro was successfully created.') }
