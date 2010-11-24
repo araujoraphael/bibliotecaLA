@@ -3,7 +3,7 @@ class CreateUsuarios < ActiveRecord::Migration
     create_table :usuarios do |t|
       t.string :name
       t.string :login
-      t.boolean :isadmin
+      t.boolean :admin
       t.database_authenticatable
       t.recoverable
       t.rememberable

@@ -3,9 +3,9 @@ class Livro < ActiveRecord::Base
   validates :titulo, presence: true, length: { minimum: 4 }
   validates :autor, presence: true, length: { minimum: 4 }
 
-  def to_param
-    self.codigo.split(/\//).join('-')
-  end
+  #def to_param
+    #self.codigo.split(/\//).join('-')
+  #end
   
   def emprestimo_atual
     self.emprestimos.where('data_devolucao IS NULL').first

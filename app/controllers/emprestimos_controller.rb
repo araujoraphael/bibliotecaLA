@@ -1,8 +1,10 @@
 class EmprestimosController < ApplicationController
-  before_filter :transformar_id, only: [:new, :destroy]
-
+  #before_filter :transformar_id, only: [:new, :destroy]
+  before_filter :authenticate_usuario!
+  load_and_authorize_resource :nested :livro
+  
   def new
-    @livro = Livro.find_by_codigo(params[:livro_id])
+    @livro = Livro.find(params[:livro_id])
     @emprestimo = @livro.emprestimos.build
     @emprestimo.data_emprestimo = DateTime.now.strftime(fmt='%F')
   
@@ -19,7 +21,7 @@ class EmprestimosController < ApplicationController
   end
     
   def destroy
-    @livro = Livro.find_by_codigo(params[:livro_id])
+    @livro = Livro.find(params[:livro_id])
     emprestimo = @livro.emprestimo_atual
     emprestimo.data_devolucao = Time.now
     emprestimo.save
@@ -31,5 +33,9 @@ private
   def transformar_id
     params[:livro_id] = params[:livro_id].split('-').join('/')
   end 
+  
+  def current_user
+    @usuario_logado = current_usuario
+  end
 
 end

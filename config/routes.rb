@@ -2,8 +2,7 @@ Biblioteca::Application.routes.draw do
 
 
   devise_for :usuario
-  devise_for :admins
-  
+    
   get "home/index"
   
   root to: "home#index"

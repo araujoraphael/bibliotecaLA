@@ -1,6 +1,8 @@
 class LivrosController < ApplicationController
   
-  before_filter :transformar_id, only: [:show, :edit, :update, :destroy]
+  #before_filter :transformar_id, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_usuario!, except: [:index, :show]
+  load_and_authorize_resource  except: [:index, :show]
   
   # GET /livros
    # GET /livros.xml
@@ -23,7 +25,7 @@ class LivrosController < ApplicationController
    # GET /livros/1
    # GET /livros/1.xml
    def show
-     @livro = Livro.find_by_codigo(params[:id])
+     @livro = Livro.find(params[:id])
 
      respond_to do |format|
        format.html # show.html.erb
@@ -45,7 +47,7 @@ class LivrosController < ApplicationController
 
    # GET /livros/1/edit
    def edit
-     @livro = Livro.find_by_codigo(params[:id])
+     @livro = Livro.find(params[:id])
    end
 
    # livro /livros
@@ -68,7 +70,7 @@ class LivrosController < ApplicationController
    # PUT /livros/1
    # PUT /livros/1.xml
    def update
-     @livro = Livro.find_by_codigo(params[:id])
+     @livro = Livro.findo(params[:id])
 
      respond_to do |format|
        if @livro.update_attributes(params[:livro])
@@ -82,7 +84,7 @@ class LivrosController < ApplicationController
    end
    
    def destroy
-     @livro = Livro.find_by_codigo(params[:id])
+     @livro = Livro.find(params[:id])
      @livro.destroy
      
      respond_to do |format|
@@ -94,6 +96,10 @@ class LivrosController < ApplicationController
 private
   def transformar_id
     params[:id] = params[:id].split('-').join('/')
+  end
+
+  def current_user
+    @usuario_logado = current_usuario
   end
 
 end

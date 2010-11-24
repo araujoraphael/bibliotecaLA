@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20101123120627) do
   create_table "usuarios", :force => true do |t|
     t.string   "name"
     t.string   "login"
-    t.boolean  "isadmin"
+    t.boolean  "admin"
     t.string   "email",                               :default => "", :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "", :null => false
     t.string   "password_salt",                       :default => "", :null => false

@@ -1,8 +1,14 @@
 class UsuariosController < ApplicationController
-
-  before_filter :authenticate_usuario!
- 
   
+  before_filter :authenticate_usuario!
+  load_and_authorize_resource
+  
+  
+  rescue_from CanCan::AccessDenied do |exception|
+        flash[:alert] = exception.message
+        redirect_to root_url
+  end
+      
   def index
     query = Usuario.scoped
     
@@ -17,8 +23,9 @@ class UsuariosController < ApplicationController
   end
   
    def show
-     @usuario = Usuario.find_by_login(params[:id])
-
+     puts 'aaaaaaaaaaah'
+     @usuario = Usuario.find(params[:id])
+    
      respond_to do |format|
        format.html # show.html.erb
        format.xml  { render xml: @usuario }
@@ -38,7 +45,7 @@ class UsuariosController < ApplicationController
    def create
       @usuario = Usuario.new(params[:usuario])
       @usuario.login = @usuario.login
-      @usuario.isadmin = false
+      @usuario.admin = false
             
       respond_to do |format|
         if @usuario.save
@@ -53,14 +60,14 @@ class UsuariosController < ApplicationController
     
      # GET /usuarios/1/edit
      def edit
-       @usuario = Usuario.find_by_login(params[:id])
+       @usuario = Usuario.find(params[:id])
      end
     
     
      # PUT /usuarios/1
      # PUT /usuarios/1.xml
      def update
-       @usuario = Usuario.find_by_login(params[:id])
+       @usuario = Usuario.find(params[:id])
 
        respond_to do |format|
          if @usuario.update_attributes(params[:usuario])
@@ -75,7 +82,7 @@ class UsuariosController < ApplicationController
     
     
     def destroy
-       @usuario = Usuario.find_by_login(params[:id])
+       @usuario = Usuario.find(params[:id])
        @usuario.destroy
 
        respond_to do |format|
@@ -83,6 +90,9 @@ class UsuariosController < ApplicationController
          format.xml { head :ok }
        end
      end
- 
+     
+     def current_user
+       @usuario_logado = current_usuario
+     end
    
 end

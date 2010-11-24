@@ -1,5 +1,5 @@
-<% if usuario_signed_in? %>
-  <% if current_usuario.isadmin %>
+<% if can? :index, @usuario_logado %>
+  <% if can? :manage , @usuario_logado %>
     <h3> Localizar Usuário </h3>
     <% form_tag usuarios_path, method: :get do %>
     
@@ -23,11 +23,10 @@
       </tr>
      <% @usuarios.sort! { |a,b| a.name.downcase <=> b.name.downcase } %>
      <% @usuarios.each do |usuario| %>
-       <% if bgcolor == "#9CC" then 
-           bgcolor = "#FFF"
-           else bgcolor = "#9CC" 
-           end
-        %>
+      <% if bgcolor == "#9CC" then %>
+      <%   bgcolor = "#FFF" %>
+      <%  else bgcolor = "#9CC" %>
+      <%  end %>
      <tr bgcolor=<%= bgcolor %> >
       <td><%= usuario.name %></td>
       <td><%= usuario.email %></td>
@@ -43,6 +42,7 @@
    <% end %>
    </table>
   <% end %> 
+
   <br />
 
   <%= link_to 'Cadastrar usuário', new_usuario_path %>
@@ -60,12 +60,22 @@
       <tr bgcolor= "#FFF" >
         <td><%= current_usuario.name %></td>
         <td><%= current_usuario.email %></td>
-        <td><%= link_to 'Detalhes', usuario_path(current_usuario) %></td>
-        <td><%= link_to 'Editar', edit_usuario_path(current_usuario) %></td>
+        <td>
+          <% if can? :show, @usuario_logado%>
+          <%=  link_to 'Detalhessss', usuario_path(@usuario_logado) %>
+          <% end %>
+        </td>
+        <td>
+         
+        <%= link_to 'Editar', edit_usuario_path(current_usuario) %></td>
         <td><%= link_to 'Apagar', current_usuario, confirm: 'Está certo disso?', method: :delete %></td>
       </tr>
       </table>
 <% end %>
+<% else %>
+shiiiiiit!
+
+
 <% end %>
 
 <br />
